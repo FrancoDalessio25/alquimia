@@ -126,22 +126,9 @@ gana(Jugador):-
 cantidadDeCosasQuePuedeConstruirUnJugador(Jugador, Cantidad):-
     findall(ElementoAConstruir, distinct(ElementoAConstruir, puedeConstruir(Jugador, ElementoAConstruir)), Construcciones),
     length(Construcciones, Cantidad).
-/*  Agrego esta segunda version que es la otra forma que se que se puede hacer que no de repetido, porque no se si distinct se podía usar:
-cantidadDeCosasQuePuedeConstruirUnJugador(Jugador, Cantidad):-
-    findall(ElementoAConstruir, puedeConstruir(Jugador, ElementoAConstruir), Construcciones),
-    list_to_set(Construcciones, Cantidad),    
-    length(Construcciones, Cantidad).
-*/
 
 % 7
 /*  El uso de universo cerrado se usa por ejemplo en la representacion del hecho de que cata tiene fuego, tierra, agua y aire, pero NO tiene vapor.
     No hace falta hacer un predicado para determinar que cata no tiene vapor, ya que por el concepto de universo cerrado que se aplica en el paradigma
     lógico, todo lo que no este va a ser considerado falso, Prolog entran en esta categoría.
 */
-
-% 8
-% de todas formas no me da, no c porque, no c si estoy aplicando algo mal o si tiene que ver con algo que este dandome mal de los anteriores
-puedeLlegarATener(Jugador, Elemento):- tiene(Jugador, Elemento).
-puedeLlegarATener(Jugador, Elemento):-
-    tieneHerramientaParaConstruirlo(Jugador, Elemento),
-    not((construir(Elemento, Ingrediente), not(puedeLlegarATener(Jugador, Ingrediente)))).
